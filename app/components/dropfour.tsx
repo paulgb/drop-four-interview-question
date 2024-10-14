@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 const CELL_SIZE = 100
 const CELL_MARGIN = 20
@@ -63,7 +63,7 @@ function DropFourGameBoard(props: DropFourGameBoardProps) {
 }
 
 function DropFourGame() {
-    const board = [
+    const defaultBoard = [
         [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
         [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
         [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
@@ -71,6 +71,8 @@ function DropFourGame() {
         [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
         [YELLOW, EMPTY, EMPTY, EMPTY, EMPTY, YELLOW, RED],
     ]
+
+    const [board, setBoard] = useState(() => JSON.parse(JSON.stringify(defaultBoard))) // hacky deep copy
 
     const onClickCell = useCallback((row: number, col: number) => {
         console.log(`Clicked on cell (${row}, ${col})`)
